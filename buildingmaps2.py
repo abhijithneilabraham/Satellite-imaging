@@ -91,14 +91,15 @@ gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 ret, thresh_img = cv2.threshold(gray,170,255,cv2.THRESH_BINARY)
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 frame1 = cv2.resize(frame,(1000,1000))
-mask = cv2.inRange(hsv, lower_range, upper_range)
+
 
 cv2.imwrite("Test.jpg",mask)
 img2 = cv2.imread("Test.jpg")
+mask = cv2.inRange(img2, lower_range, upper_range)
 
 contours =  cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[-2]
 '''
 img2, contours = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 '''
-cv2.drawContours(img, contours, -1, (0,255,0), 3)
+cv2.drawContours(img2, contours, -1, (0,255,0), 3)
 cv2.imwrite("Test2.jpg",img2)
