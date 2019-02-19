@@ -79,3 +79,19 @@ try:
     print(val)
 except:
     print('Something went wrong.')
+    
+import cv2
+import numpy as np
+img = cv2.imread("test.tiff")
+frame = img[100:900, 100:900]
+frame1 = cv2.resize(frame,(1000,1000))
+lower_range = np.array([0,0,0])
+upper_range =np.array([255,115,255])
+mask = cv2.inRange(frame1, lower_range, upper_range)
+cv2.imwrite("Test.jpg",mask)
+img2 = cv2.imread("Test.jpg")
+imgray = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
+ret,thresh = cv2.threshold(imgray,127,255,0)
+im2, contours = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(img2, contours, -1, (0,255,0), 3)
+cv2.imwrite("Test2.jpg",img2)
