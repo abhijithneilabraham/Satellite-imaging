@@ -93,7 +93,7 @@ hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 frame1 = cv2.resize(frame,(1000,1000))
 
 
-cv2.imwrite("Test.jpg",mask)
+cv2.imwrite("Test.jpg",frame)
 img2 = cv2.imread("Test.jpg")
 mask = cv2.inRange(img2, lower_range, upper_range)
 
